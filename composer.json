@@ -1,0 +1,69 @@
+{
+    "name": "bpmore/statamic-site-weather",
+    "description": "One dashboard tile that shows your site's overall health as weather, read from the addons that already measure it.",
+    "type": "statamic-addon",
+    "keywords": [
+        "statamic",
+        "dashboard",
+        "widget",
+        "health",
+        "accessibility"
+    ],
+    "homepage": "https://github.com/bpmore/statamic-site-weather",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/bpmore/statamic-site-weather/issues",
+        "source": "https://github.com/bpmore/statamic-site-weather",
+        "docs": "https://github.com/bpmore/statamic-site-weather/blob/main/README.md"
+    },
+    "authors": [
+        {
+            "name": "Brent Passmore"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "statamic/cms": "^6.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.18",
+        "orchestra/testbench": "^10.8 || ^11.0",
+        "pestphp/pest": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bpmore\\SiteWeather\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bpmore\\SiteWeather\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "statamic": {
+            "name": "Site Weather",
+            "slug": "site-weather",
+            "description": "Your site's health as weather. Sunny, overcast, drizzle, storm."
+        },
+        "laravel": {
+            "providers": [
+                "Bpmore\\SiteWeather\\ServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "pixelfear/composer-dist-plugin": true,
+            "php-http/discovery": true
+        },
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "scripts": {
+        "test": "pest",
+        "lint": "pint"
+    }
+}

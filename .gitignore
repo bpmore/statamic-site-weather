@@ -1,0 +1,11 @@
+/vendor/
+/.phpunit.cache/
+/.pest/
+
+# Statamic's PreventsSavingStacheItemsToDisk writes here during tests and
+# recreates the directory afterwards; only the placeholder is tracked.
+/tests/__fixtures__/dev-null/*
+!/tests/__fixtures__/dev-null/.gitkeep
+
+# Written by run-build.sh on every unattended attempt.
+/build-log.jsonl
