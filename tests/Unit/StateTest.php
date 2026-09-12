@@ -74,3 +74,10 @@ it('accepts any iterable, not just arrays', function () {
 
     expect(State::worst($states))->toBe(State::Rain);
 });
+
+it('gives every state a distinct icon shape', function () {
+    $icons = array_map(fn (State $s) => $s->icon(), State::cases());
+
+    expect($icons)->toBe(['sun', 'sun-behind-cloud', 'cloud', 'cloud-rain', 'cloud-lightning', 'dashed-circle'])
+        ->and(array_unique($icons))->toHaveCount(6);
+});

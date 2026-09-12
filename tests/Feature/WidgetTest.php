@@ -51,8 +51,8 @@ it('shows the overall state, the worst headline, and a band strip', function () 
 
     expect($html)->toContain('Overall: <span data-state="storm">Storm</span>')
         ->and($html)->toContain('Accessibility: 412 open issues')
-        ->and($html)->toContain('<a href="/cp/a11y-report" class="underline text-gray-900 dark:text-gray-100">Accessibility: Storm</a>')
-        ->and($html)->toContain('<a href="/cp/lifecycle" class="underline text-gray-900 dark:text-gray-100">Freshness: Fair</a>')
+        ->and($html)->toMatch('~<a href="/cp/a11y-report" class="[^"]*underline[^"]*">\s*<svg[^>]*data-icon="cloud-lightning"[^>]*>.*?</svg>\s*<span>Accessibility: Storm</span>\s*</a>~s')
+        ->and($html)->toMatch('~<a href="/cp/lifecycle" class="[^"]*underline[^"]*">\s*<svg[^>]*data-icon="sun-behind-cloud"[^>]*>.*?</svg>\s*<span>Freshness: Fair</span>\s*</a>~s')
         ->and($html)->toContain('data-band="accessibility" data-state="storm"')
         ->and($html)->toContain('data-band="freshness" data-state="fair"')
         ->and($html)->not->toContain('Nothing reporting yet');
@@ -73,7 +73,7 @@ it('renders a band without a url as plain text, not a link', function () {
 
     $html = renderWidget();
 
-    expect($html)->toContain('<span class="text-gray-700 dark:text-gray-300">Freshness: Clear</span>')
+    expect($html)->toMatch('~<span class="[^"]*text-gray-700[^"]*">\s*<svg[^>]*data-icon="sun"[^>]*>.*?</svg>\s*<span>Freshness: Clear</span>\s*</span>~s')
         ->and($html)->not->toContain('<a href');
 });
 
@@ -120,4 +120,40 @@ it('has no javascript and no animation', function () {
         ->and($html)->not->toContain('animate')
         ->and($html)->not->toContain('transition')
         ->and($html)->not->toMatch('/\son[a-z]+=/i');
+});
+
+it('draws each state as its own shape beside the label', function (State $state, string $icon, string $colour) {
+    $contributor = $state->isMeasured()
+        ? FakeContributor::measured('band', 'Band', $state, 'Headline', '/cp/band')
+        : FakeContributor::unknown('band', 'Band');
+    tagFake('fake.band', $contributor);
+
+    $html = renderWidget();
+
+    // The overall icon (size-8) and the band's icon (size-4) both carry the shape and the colour.
+    expect($html)->toMatch('~<svg[^>]*data-icon="'.$icon.'"[^>]*class="size-8 shrink-0 '.$colour.'"~')
+        ->and($html)->toMatch('~<svg[^>]*data-icon="'.$icon.'"[^>]*class="size-4 shrink-0 '.$colour.'"[^>]*>.*?</svg>\\s*<span>Band: '.$state->label().'</span>~s');
+})->with([
+    'clear' => [State::Clear, 'sun', 'text-amber-600'],
+    'fair' => [State::Fair, 'sun-behind-cloud', 'text-amber-600'],
+    'overcast' => [State::Overcast, 'cloud', 'text-gray-500'],
+    'rain' => [State::Rain, 'cloud-rain', 'text-blue-500'],
+    'storm' => [State::Storm, 'cloud-lightning', 'text-red-600'],
+    'unknown' => [State::Unknown, 'dashed-circle', 'text-gray-500'],
+]);
+
+it('keeps every icon decorative and unfocusable, one per label', function () {
+    tagFake('fake.accessibility', FakeContributor::measured('accessibility', 'Accessibility', State::Storm, '412 open issues', '/cp/a11y-report'));
+    tagFake('fake.freshness', FakeContributor::measured('freshness', 'Freshness', State::Fair, '3% overdue'));
+    tagFake('fake.readability', FakeContributor::unknown('readability', 'Readability'));
+
+    $html = renderWidget();
+
+    preg_match_all('~<svg\\b[^>]*>~', $html, $svgs);
+
+    expect($svgs[0])->toHaveCount(4) // one overall, three bands
+        ->each->toContain('aria-hidden="true"', 'focusable="false"', 'stroke="currentColor"');
+
+    expect($html)->not->toContain('<title')
+        ->and($html)->not->toContain('role="img"');
 });

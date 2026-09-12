@@ -36,6 +36,22 @@ enum State: string
         };
     }
 
+    /**
+     * The shape that stands for this state, always drawn beside the label -
+     * six silhouettes a person can tell apart with no colour at all.
+     */
+    public function icon(): string
+    {
+        return match ($this) {
+            self::Clear => 'sun',
+            self::Fair => 'sun-behind-cloud',
+            self::Overcast => 'cloud',
+            self::Rain => 'cloud-rain',
+            self::Storm => 'cloud-lightning',
+            self::Unknown => 'dashed-circle',
+        };
+    }
+
     public function isMeasured(): bool
     {
         return $this !== self::Unknown;
