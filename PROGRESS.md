@@ -39,9 +39,11 @@ ALL TASKS COMPLETE
 ## Phase 5 — The first real band
 - [x] **5.1 Verify the first real contributor in the host site.** A11y Docs went first (A11y Report has no repo yet): `Bpmore\StatamicA11yDocs\Weather\DocumentsContributor` on branch `build/site-weather-band` in `../statamic-a11y-docs`. The dev-site tile shows the real Documents band beside the demo bands; the demo provider no longer fakes `documents`.
 
+- [x] **5.2 Verify the second real contributor in the host site — A11y Report.** `Bpmore\A11yReport\Weather\AccessibilityContributor` on branch `feature/site-weather-band` in `../ally-report` (the repo is there, not under a `statamic-*` name). The dev site now links A11y Report; after `a11y:report:install` and one `a11y:scan --sync` the tile reads **Accessibility: Clear**, dated, and the band links to the report utility — confirmed in Chrome. The demo provider no longer fakes `accessibility`.
+
 ## Follow-ups outside this repo — not tasks for this loop
 - **Lifecycle** (Freshness) — queued as a task in `../statamic-lifecycle/PROGRESS.md` Phase 7, after its utility dashboard exists to link to. **Plain** (Readability) — queued in `../statamic-plain/PROGRESS.md` Phase 3, after its utility screen. Each product's own loop does it; the task text names the A11y Docs example to follow and the demo band to drop from `../statamic-dev/app/Providers/SiteWeatherDemoProvider.php`.
-- **A11y Report** (Accessibility), **Constellation** (Structure), **Drift** (Translations) have no repos yet; queue the same task when they are scaffolded. Wayfinding, Delegated and LMS are not bands in the spec.
+- **Constellation** (Structure) and **Drift** (Translations) have no repos yet; queue the same task when they are scaffolded. Wayfinding, Delegated and LMS are not bands in the spec.
 - Publish this package so the path repositories in the paid products' `require-dev` can become a Packagist constraint.
 
 ## House rules that apply to every product in this line
@@ -136,3 +138,9 @@ ALL TASKS COMPLETE
 - The pre-existing failing test in A11y Docs (`PublishGateTest`, fails on its `main` untouched) is noted in that repo's `PROGRESS.md`, not fixed.
 
 **2026-09-11 — after 5.1.** Lifecycle and Plain are both mid-build with their own task lists, and neither has a dashboard yet for a band to link to, so their bands were **queued, not built** — one task each, placed after the dashboard task in their own `PROGRESS.md` (commits `cd497ad`, `ed7334d` on their branches). README gained rule 7, "ask whether you are set up before you read", and a pointer to the real A11y Docs contributor.
+
+**2026-09-12 — Phase 5.2 (second real band, A11y Report).**
+- A11y Report is a released product (`v1.1.0`, PR workflow, **no `composer.lock` by policy, CI runs `composer update --prefer-lowest`**), so the A11y Docs recipe — a path-repository dev dependency — would break its CI. Different constraints, different shape: the decision (`AccessibilityWeather::decide()`) is framework-free and tested with no Site Weather present; the contributor is a thin mapping onto the contract whose integration tests **skip with a stated reason** when the interface is absent and run when a developer installs Site Weather locally. Both modes were run: 10 unit + 5 integration green with it present; 10 green + 5 skipped without. Once Site Weather is on Packagist, a real `require-dev` removes the skip.
+- Thresholds, A11y Report's own: clear = nothing open; fair = nothing serious/critical; overcast = serious, nothing critical; rain = anything critical; storm = critical issues at a tenth of pages scanned or more, **or critical issues with the 30-day total rising** — the spec's "trend" made concrete. Headline: "412 open issues, 61 critical, and rising".
+- Two small things learned there: `please` shows `statamic:`-prefixed commands without the prefix, so a headline must say `php please a11y:report:install`, not the signature; and a scan that *failed* is not "no scan has run" — the band says "No scan has completed yet".
+- The dev-site tile now has two real bands (Accessibility, Documents) and four demo ones; Plain is also installed there with its own widget, so its queued band has a home.
