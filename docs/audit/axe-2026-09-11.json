@@ -1,0 +1,73 @@
+{
+  "populated-light": {
+    "violations": [],
+    "incomplete": [],
+    "passes": [
+      "aria-hidden-focus",
+      "avoid-inline-spacing",
+      "color-contrast",
+      "link-name",
+      "list",
+      "listitem",
+      "target-size"
+    ],
+    "pageViolationsTouchingWidget": [],
+    "pageViolationsTotal": 1,
+    "text": "Overall: storm. Accessibility: storm, 412 open issues. Documents: clear. Freshness: fair. Readability: overcast. Structure: rain. Translations: unknown.\n\nOverall: Storm\n\nAccessibility: 412 open issues\n\nAccessibility: Storm\nDocuments: Clear\nFreshness: Fair\nReadability: Overcast\nStructure: Rain\nTranslations: Unknown",
+    "srSummary": "Overall: storm. Accessibility: storm, 412 open issues. Documents: clear. Freshness: fair. Readability: overcast. Structure: rain. Translations: unknown.",
+    "animated": false
+  },
+  "empty-light": {
+    "violations": [],
+    "incomplete": [],
+    "passes": [
+      "color-contrast"
+    ],
+    "pageViolationsTouchingWidget": [],
+    "pageViolationsTotal": 1,
+    "text": "Nothing reporting yet. Site Weather shows what other addons have already measured. A11y Report, A11y Docs, Lifecycle, Plain, Constellation and Drift each add a band when installed.",
+    "srSummary": null,
+    "animated": false
+  },
+  "populated-dark": {
+    "violations": [],
+    "incomplete": [],
+    "passes": [
+      "aria-hidden-focus",
+      "avoid-inline-spacing",
+      "color-contrast",
+      "link-name",
+      "list",
+      "listitem",
+      "target-size"
+    ],
+    "pageViolationsTouchingWidget": [],
+    "pageViolationsTotal": 1,
+    "text": "Overall: storm. Accessibility: storm, 412 open issues. Documents: clear. Freshness: fair. Readability: overcast. Structure: rain. Translations: unknown.\n\nOverall: Storm\n\nAccessibility: 412 open issues\n\nAccessibility: Storm\nDocuments: Clear\nFreshness: Fair\nReadability: Overcast\nStructure: Rain\nTranslations: Unknown",
+    "srSummary": "Overall: storm. Accessibility: storm, 412 open issues. Documents: clear. Freshness: fair. Readability: overcast. Structure: rain. Translations: unknown.",
+    "animated": false
+  },
+  "empty-dark": {
+    "violations": [],
+    "incomplete": [],
+    "passes": [
+      "color-contrast"
+    ],
+    "pageViolationsTouchingWidget": [],
+    "pageViolationsTotal": 1,
+    "text": "Nothing reporting yet. Site Weather shows what other addons have already measured. A11y Report, A11y Docs, Lifecycle, Plain, Constellation and Drift each add a band when installed.",
+    "srSummary": null,
+    "animated": false
+  },
+  "focus": {
+    "text": "Accessibility: Storm",
+    "tag": "A",
+    "focusVisible": true,
+    "outlineStyle": "solid",
+    "outlineWidth": "2px",
+    "outlineColor": "oklch(0.707 0.165 254.624)",
+    "outlineOffset": "-1px",
+    "textDecoration": "underline"
+  },
+  "console": []
+}
