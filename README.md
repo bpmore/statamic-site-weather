@@ -159,10 +159,23 @@ analysis can see the interface.
    click your band and want the detail.
 6. **Thresholds are yours.** What makes accessibility a storm rather than rain
    is your call; Site Weather has no opinion and no configuration for it.
+7. **Ask whether you are set up before you read.** An addon that is installed
+   but never initialised — no database yet, no first run — should return
+   `Reading::unknown('Not set up yet: run php please yours:install', $url)`,
+   not let a query throw. A thrown exception is caught and the band reads
+   "Failed to report", which is honest but tells the person nothing about
+   what to do.
 
 If `reading()` throws, the exception is logged and your band reads unknown with
 the headline "Failed to report". The other bands render. The dashboard never
 breaks because of a band.
+
+### A real one
+
+A11y Docs reports the Documents band: [`DocumentsContributor`](https://github.com/bpmore/statamic-a11y-docs/blob/main/src/Weather/DocumentsContributor.php)
+reads three stored aggregates, asks whether its database is installed first,
+and decides its own thresholds — clear when nothing fails, storm when critical
+problems reach a tenth of the library.
 
 ### Trying it without a real contributor
 
