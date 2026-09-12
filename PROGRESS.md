@@ -41,8 +41,10 @@ ALL TASKS COMPLETE
 
 - [x] **5.2 Verify the second real contributor in the host site — A11y Report.** `Bpmore\A11yReport\Weather\AccessibilityContributor` on branch `feature/site-weather-band` in `../ally-report` (the repo is there, not under a `statamic-*` name). The dev site now links A11y Report; after `a11y:report:install` and one `a11y:scan --sync` the tile reads **Accessibility: Clear**, dated, and the band links to the report utility — confirmed in Chrome. The demo provider no longer fakes `accessibility`.
 
+- [x] **5.3 Verify the third real contributor in the host site — Plain.** Built by Plain's own loop from the queued task (`a12e503` in `../statamic-plain`, 2026-09-12 09:23), which also dropped its demo band from the dev site as the task said. The tile reads **Readability: Clear**, linking to `/cp/utilities/plain`; no duplicate-key warning.
+
 ## Follow-ups outside this repo — not tasks for this loop
-- **Lifecycle** (Freshness) — queued as a task in `../statamic-lifecycle/PROGRESS.md` Phase 7, after its utility dashboard exists to link to. **Plain** (Readability) — queued in `../statamic-plain/PROGRESS.md` Phase 3, after its utility screen. Each product's own loop does it; the task text names the A11y Docs example to follow and the demo band to drop from `../statamic-dev/app/Providers/SiteWeatherDemoProvider.php`.
+- **Lifecycle** (Freshness) — queued in `../statamic-lifecycle/PROGRESS.md` Phase 7; its utility dashboards (07:01) and widget (08:42) landed on 2026-09-12, so the band is its next unfinished task and its loop will take it. Verify here as 5.4 when it lands, and check the demo band was dropped.
 - **Constellation** (Structure) and **Drift** (Translations) have no repos yet; queue the same task when they are scaffolded. Wayfinding, Delegated and LMS are not bands in the spec.
 - Publish this package so the path repositories in the paid products' `require-dev` can become a Packagist constraint.
 
@@ -144,3 +146,5 @@ ALL TASKS COMPLETE
 - Thresholds, A11y Report's own: clear = nothing open; fair = nothing serious/critical; overcast = serious, nothing critical; rain = anything critical; storm = critical issues at a tenth of pages scanned or more, **or critical issues with the 30-day total rising** — the spec's "trend" made concrete. Headline: "412 open issues, 61 critical, and rising".
 - Two small things learned there: `please` shows `statamic:`-prefixed commands without the prefix, so a headline must say `php please a11y:report:install`, not the signature; and a scan that *failed* is not "no scan has run" — the band says "No scan has completed yet".
 - The dev-site tile now has two real bands (Accessibility, Documents) and four demo ones; Plain is also installed there with its own widget, so its queued band has a home.
+
+**2026-09-12 — Phase 5.3 (third real band, Plain) and a rule for this loop.** Plain's and Lifecycle's loops run concurrently with this one. Plain's had an uncommitted band in progress when I looked (untracked `src/Weather/`, 6 of 7 tests passing) and committed it minutes later; **never edit a sibling's working tree while its loop may be running** — queue a task in its `PROGRESS.md` and verify the result from here. The queued-task text worked as a handoff: Plain followed it exactly, including the demo-provider cleanup in the dev site.
