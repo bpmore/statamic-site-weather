@@ -31,7 +31,7 @@
 
 ## Phase 4 — Ship
 - [x] **4.1 README.** What it is, what it never does (compute), the honest empty state, and "Writing a contributor": the interface, the tag snippet for a service provider, the read-don't-compute rule, when to return `unknown`, and that the band's `url` should be the product's own dashboard. Screenshots of a full strip and the empty state. `CHANGELOG.md`, `LICENSE.md` (MIT — it is free).
-- [ ] **4.2 Scale check.** Site Weather does no work that scales with entries. Prove the failure modes that do exist: register 20 fake contributors including one that throws and one that is slow; confirm the dashboard renders, the bad band reads unknown, and total time is the sum of contributors — nothing added by the widget. Record timings under Notes.
+- [x] **4.2 Scale check.** Site Weather does no work that scales with entries. Prove the failure modes that do exist: register 20 fake contributors including one that throws and one that is slow; confirm the dashboard renders, the bad band reads unknown, and total time is the sum of contributors — nothing added by the widget. Record timings under Notes.
 - [ ] **4.3 Listing copy and tag 1.0.** `LISTING.md` with marketplace copy (free; the funnel framing stays internal — the listing describes what the user sees). `git tag v1.0.0` locally (push is a human step).
 
 ## Follow-ups outside this repo — not tasks for this loop
@@ -109,3 +109,10 @@
 - The empty state now links to the README's contributor section — the "link to what could" from SPEC §8. Link text is a full sentence ("Any addon can contribute a band.") so it reads on its own. Re-captured and re-audited on the real dashboard in both schemes: zero violations, `link-in-text-block` passing, reachable by Tab. Temporary login route added and removed again; `routes/web.php` restored, URL 404s.
 - `CHANGELOG.md` states the versioning promise: the contract (`WeatherContributor`, `Reading`, `State`, the tag) is the public API and breaking it is a major. `LICENSE.md` is MIT, matching `composer.json`.
 - The README's `github.com/bpmore/statamic-site-weather` links assume the repo is published there (the `homepage` in `composer.json`). There is no remote yet.
+
+**2026-09-11 — Phase 4.2 (scale check).** `tests/Feature/ScaleTest.php`, three tests, run through the real `/cp/dashboard` request under Testbench (`actingAs` a super user, widget read out of the Inertia props) and through the loader for timing.
+- **Twenty contributors — 18 fakes across all six states, one that throws, one that sleeps 200 ms** — the dashboard returns 200 with one widget, 20 bands, the thrower reading unknown, the sleeper reading rain, overall storm.
+- **Cost of the widget itself:** 1 band 0.16 ms; 20 bands 0.86 ms; **0.037 ms per extra band** (min of three warmed renders, Blade compiled). With the sleeper and thrower: 210.3 ms total, of which `usleep(200000)` alone measures 204 ms on this machine and the thrower's exception-plus-log 0.28 ms — the widget's own share stays under a millisecond; the remainder is sleep jitter.
+- Budgets in the tests are deliberately loose for CI (overhead beyond the sleep < 100 ms; 20 bands < 50 ms) — they catch a regression of an order of magnitude, not noise. `SITE_WEATHER_TIMINGS=1 vendor/bin/pest --filter=Scale` prints the measured numbers.
+- Conclusion, as SPEC §9 predicted: nothing here scales with entries. The one way the tile gets slow is a contributor that computes on request, which the contract forbids and the README repeats; a contributor that throws costs a quarter of a millisecond and one unknown band.
+- New fixture: `SlowContributor(int $milliseconds)`.
