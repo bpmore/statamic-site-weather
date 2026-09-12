@@ -1,3 +1,5 @@
+ALL TASKS COMPLETE
+
 # PROGRESS — Site Weather
 
 **Spec:** `SPEC.md` — hand-written, committed. §9 records the decisions made in the first session.
@@ -32,7 +34,7 @@
 ## Phase 4 — Ship
 - [x] **4.1 README.** What it is, what it never does (compute), the honest empty state, and "Writing a contributor": the interface, the tag snippet for a service provider, the read-don't-compute rule, when to return `unknown`, and that the band's `url` should be the product's own dashboard. Screenshots of a full strip and the empty state. `CHANGELOG.md`, `LICENSE.md` (MIT — it is free).
 - [x] **4.2 Scale check.** Site Weather does no work that scales with entries. Prove the failure modes that do exist: register 20 fake contributors including one that throws and one that is slow; confirm the dashboard renders, the bad band reads unknown, and total time is the sum of contributors — nothing added by the widget. Record timings under Notes.
-- [ ] **4.3 Listing copy and tag 1.0.** `LISTING.md` with marketplace copy (free; the funnel framing stays internal — the listing describes what the user sees). `git tag v1.0.0` locally (push is a human step).
+- [x] **4.3 Listing copy and tag 1.0.** `LISTING.md` with marketplace copy (free; the funnel framing stays internal — the listing describes what the user sees). `git tag v1.0.0` locally (push is a human step).
 
 ## Follow-ups outside this repo — not tasks for this loop
 - First real contributor: **A11y Report**, implemented in *that* repo (SPEC §7.5). When it exists, add a task here: verify the real band in the host site.
@@ -116,3 +118,10 @@
 - Budgets in the tests are deliberately loose for CI (overhead beyond the sleep < 100 ms; 20 bands < 50 ms) — they catch a regression of an order of magnitude, not noise. `SITE_WEATHER_TIMINGS=1 vendor/bin/pest --filter=Scale` prints the measured numbers.
 - Conclusion, as SPEC §9 predicted: nothing here scales with entries. The one way the tile gets slow is a contributor that computes on request, which the contract forbids and the README repeats; a contributor that throws costs a quarter of a millisecond and one unknown band.
 - New fixture: `SlowContributor(int $milliseconds)`.
+
+**2026-09-11 — Phase 4.3 (listing, tag).**
+- `LISTING.md` follows the a11y-docs shape: name, price (free), one-liner, card summary (98 chars), long description, what it does not do, features, requirements, suite positioning, categories (Widget primary, then Utility), keywords, screenshots. The funnel framing is absent from the copy, as the task asked; the listing describes what a person sees.
+- `CHANGELOG.md` dated `1.0.0 - 2026-09-11`. Tagged `v1.0.0` locally on the final commit; **pushing the tag and the branch is a human step** — there is no remote, and `git push` is denied to this loop by design.
+- Final state: 75 tests, 268 assertions, pint clean, `composer validate` clean, Statamic 6.32 resolved here and 6.31 in the host site.
+
+**What is not done, deliberately (see "Follow-ups outside this repo"):** no real contributor exists yet. The first — A11y Report — is built in that repo. Until then the dev site shows the tile from `SiteWeatherDemoProvider`. When the first real one lands, the task to add here is: verify the real band in the host site, then delete the demo provider.
