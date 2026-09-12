@@ -36,9 +36,12 @@ ALL TASKS COMPLETE
 - [x] **4.2 Scale check.** Site Weather does no work that scales with entries. Prove the failure modes that do exist: register 20 fake contributors including one that throws and one that is slow; confirm the dashboard renders, the bad band reads unknown, and total time is the sum of contributors — nothing added by the widget. Record timings under Notes.
 - [x] **4.3 Listing copy and tag 1.0.** `LISTING.md` with marketplace copy (free; the funnel framing stays internal — the listing describes what the user sees). `git tag v1.0.0` locally (push is a human step).
 
+## Phase 5 — The first real band
+- [x] **5.1 Verify the first real contributor in the host site.** A11y Docs went first (A11y Report has no repo yet): `Bpmore\StatamicA11yDocs\Weather\DocumentsContributor` on branch `build/site-weather-band` in `../statamic-a11y-docs`. The dev-site tile shows the real Documents band beside the demo bands; the demo provider no longer fakes `documents`.
+
 ## Follow-ups outside this repo — not tasks for this loop
-- First real contributor: **A11y Report**, implemented in *that* repo (SPEC §7.5). When it exists, add a task here: verify the real band in the host site.
-- Then A11y Docs, Lifecycle, Plain, Constellation, Drift — each in its own repo, each mapping its own severities to a `State`.
+- A11y Report (when its repo exists), Lifecycle, Plain, Constellation, Drift — each in its own repo, each mapping its own severities to a `State`, each following the A11y Docs example. Drop the matching demo band from `../statamic-dev/app/Providers/SiteWeatherDemoProvider.php` as each lands.
+- Publish this package so the path repositories in the paid products' `require-dev` can become a Packagist constraint.
 
 ## House rules that apply to every product in this line
 - Shared vocabulary: weather states are the *presentation* vocabulary; each contributor maps its own severity names to a state and keeps its own finding shape
@@ -125,3 +128,8 @@ ALL TASKS COMPLETE
 - Final state: 75 tests, 268 assertions, pint clean, `composer validate` clean, Statamic 6.32 resolved here and 6.31 in the host site.
 
 **What is not done, deliberately (see "Follow-ups outside this repo"):** no real contributor exists yet. The first — A11y Report — is built in that repo. Until then the dev site shows the tile from `SiteWeatherDemoProvider`. When the first real one lands, the task to add here is: verify the real band in the host site, then delete the demo provider.
+
+**2026-09-11 — Phase 5.1 (first real band, A11y Docs).**
+- Nothing in this package changed; the work is in `../statamic-a11y-docs` (branch `build/site-weather-band`, commit `2d0caaf`) and it exercised the contract exactly as designed: one class, one string tag in `register()`, no dependency on this package (`suggest` + `require-dev` via a path repository until this is on Packagist).
+- **What the host-site check found:** A11y Docs was installed there but `docs:install` never run, so its SQLite file did not exist and `reading()` threw. Site Weather did what 2.3 promised — the dashboard rendered, the band read unknown "Failed to report", the exception was logged — but a bare "Failed to report" with no link is a poor answer to "installed, not set up". The contributor now checks `DocumentDatabase::isInstalled()` first and says "Not set up yet: run php please docs:install", with the dashboard link. A lesson for every contributor that owns storage: **ask whether you are set up before you read**, because a caught exception is honest but unhelpful. Worth a line in the README's rules when the next contributor lands.
+- The pre-existing failing test in A11y Docs (`PublishGateTest`, fails on its `main` untouched) is noted in that repo's `PROGRESS.md`, not fixed.
