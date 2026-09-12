@@ -43,8 +43,10 @@ ALL TASKS COMPLETE
 
 - [x] **5.3 Verify the third real contributor in the host site — Plain.** Built by Plain's own loop from the queued task (`a12e503` in `../statamic-plain`, 2026-09-12 09:23), which also dropped its demo band from the dev site as the task said. The tile reads **Readability: Clear**, linking to `/cp/utilities/plain`; no duplicate-key warning.
 
+- [x] **5.4 Verify the fourth real contributor in the host site — Lifecycle.** Built by Lifecycle's own loop from the queued task (`b184992` in `../statamic-lifecycle`, 2026-09-12 10:17), demo band dropped by it. The tile reads **Freshness: Clear**, linking to `/cp/lifecycle`; six bands, no duplicate-key warning.
+
 ## Follow-ups outside this repo — not tasks for this loop
-- **Lifecycle** (Freshness) — queued in `../statamic-lifecycle/PROGRESS.md` Phase 7; its utility dashboards (07:01) and widget (08:42) landed on 2026-09-12, so the band is its next unfinished task and its loop will take it. Verify here as 5.4 when it lands, and check the demo band was dropped.
+- Four of six bands are real (Accessibility, Documents, Freshness, Readability). The dev site's demo provider now fakes only Structure and Translations.
 - **Constellation** (Structure) and **Drift** (Translations) have no repos yet; queue the same task when they are scaffolded. Wayfinding, Delegated and LMS are not bands in the spec.
 - Publish this package so the path repositories in the paid products' `require-dev` can become a Packagist constraint.
 
@@ -148,3 +150,5 @@ ALL TASKS COMPLETE
 - The dev-site tile now has two real bands (Accessibility, Documents) and four demo ones; Plain is also installed there with its own widget, so its queued band has a home.
 
 **2026-09-12 — Phase 5.3 (third real band, Plain) and a rule for this loop.** Plain's and Lifecycle's loops run concurrently with this one. Plain's had an uncommitted band in progress when I looked (untracked `src/Weather/`, 6 of 7 tests passing) and committed it minutes later; **never edit a sibling's working tree while its loop may be running** — queue a task in its `PROGRESS.md` and verify the result from here. The queued-task text worked as a handoff: Plain followed it exactly, including the demo-provider cleanup in the dev site.
+
+**2026-09-12 — Phase 5.4 (fourth real band, Lifecycle).** Its loop added two judgments the task text did not ask for and that are right: proportions are of content under review (tracked minus exempt), so a deliberately exempted archive does not dilute the reading; and "everything exempt" reads unknown, because nothing is being measured. Expired content weighs more than merely overdue. Worth folding into the README's contributor rules as an example of "thresholds are yours": exclude what the site has chosen not to measure. Spec §1's "with four it's genuinely informative" is now the state of the dev site.
