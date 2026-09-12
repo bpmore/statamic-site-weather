@@ -38,6 +38,7 @@ it('shows the empty state, and never says sunny, when nothing reports', function
 
     expect($html)->toContain('Nothing reporting yet.')
         ->and($html)->toContain('each add a band when installed')
+        ->and($html)->toContain('<a href="https://github.com/bpmore/statamic-site-weather#writing-a-contributor"')
         ->and($html)->not->toContain('Overall:')
         ->and($html)->not->toContain('Clear')
         ->and($html)->not->toContain('<ul');

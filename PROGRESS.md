@@ -30,7 +30,7 @@
 - [x] **3.3 Audit the widget itself.** Run axe against the host site's dashboard with the widget populated by fakes and with the empty state; fix every finding; confirm nothing moves with `prefers-reduced-motion` unset (there is no animation to reduce). Record the axe result under Notes — this is the product line's own discipline applied to itself.
 
 ## Phase 4 — Ship
-- [ ] **4.1 README.** What it is, what it never does (compute), the honest empty state, and "Writing a contributor": the interface, the tag snippet for a service provider, the read-don't-compute rule, when to return `unknown`, and that the band's `url` should be the product's own dashboard. Screenshots of a full strip and the empty state. `CHANGELOG.md`, `LICENSE.md` (MIT — it is free).
+- [x] **4.1 README.** What it is, what it never does (compute), the honest empty state, and "Writing a contributor": the interface, the tag snippet for a service provider, the read-don't-compute rule, when to return `unknown`, and that the band's `url` should be the product's own dashboard. Screenshots of a full strip and the empty state. `CHANGELOG.md`, `LICENSE.md` (MIT — it is free).
 - [ ] **4.2 Scale check.** Site Weather does no work that scales with entries. Prove the failure modes that do exist: register 20 fake contributors including one that throws and one that is slow; confirm the dashboard renders, the bad band reads unknown, and total time is the sum of contributors — nothing added by the widget. Record timings under Notes.
 - [ ] **4.3 Listing copy and tag 1.0.** `LISTING.md` with marketplace copy (free; the funnel framing stays internal — the listing describes what the user sees). `git tag v1.0.0` locally (push is a human step).
 
@@ -103,3 +103,9 @@
 - Real dark card colour is `oklch(0.236 0.006 286.015)`, the lightness assumed in 3.2; contrast figures stand.
 - Evidence kept in-repo: `docs/screenshots/` (widget light/dark, empty, focus — real dashboard renders, ready for the README) and `docs/audit/` (axe results JSON and the script, with a header saying what it needs).
 - The dev site gained `app/Providers/SiteWeatherDemoProvider.php` (six sample bands via anonymous classes; `?weather-empty=1` shows the empty state). Kept on purpose — it is how the tile is seen populated while developing — and it is also a working example of the contract from a host app. Delete when real contributors land. Phase 3 is complete.
+
+**2026-09-11 — Phase 4.1 (README, CHANGELOG, LICENSE).**
+- README leads with the tile and the "never computes" rule, then installing, what you see, unknown, the empty state, the bands table, and "Writing a contributor" with a full example class, the tag snippet, and six numbered rules (read-don't-compute, unknown when unmeasured, dated measured readings, stable unique key, url = your dashboard, thresholds are yours). Screenshots are the real-dashboard captures from 3.3.
+- The empty state now links to the README's contributor section — the "link to what could" from SPEC §8. Link text is a full sentence ("Any addon can contribute a band.") so it reads on its own. Re-captured and re-audited on the real dashboard in both schemes: zero violations, `link-in-text-block` passing, reachable by Tab. Temporary login route added and removed again; `routes/web.php` restored, URL 404s.
+- `CHANGELOG.md` states the versioning promise: the contract (`WeatherContributor`, `Reading`, `State`, the tag) is the public API and breaking it is a major. `LICENSE.md` is MIT, matching `composer.json`.
+- The README's `github.com/bpmore/statamic-site-weather` links assume the repo is published there (the `homepage` in `composer.json`). There is no remote yet.

@@ -15,6 +15,7 @@
             <p class="site-weather-empty text-gray-700 dark:text-gray-300">
                 <strong class="font-semibold text-gray-900 dark:text-gray-100">Nothing reporting yet.</strong>
                 Site Weather shows what other addons have already measured. A11y Report, A11y Docs, Lifecycle, Plain, Constellation and Drift each add a band when installed.
+                <a href="https://github.com/bpmore/statamic-site-weather#writing-a-contributor" class="rounded-sm underline text-gray-900 dark:text-gray-100">Any addon can contribute a band.</a>
             </p>
         @else
             @php($overall = $forecast->overall())
