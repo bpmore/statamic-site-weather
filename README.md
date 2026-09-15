@@ -72,8 +72,8 @@ could.
 | Documents | A11y Docs | failing documents, proportion of library |
 | Freshness | Lifecycle | overdue percentage |
 | Readability | Plain | proportion above target grade |
-| Structure | Constellation | orphan count |
-| Translations | Drift | localizations behind |
+| Structure | Constellation | share of pages nothing links to |
+| Content model | Fallow | dead and sparse blueprint fields, orphan keys — from a saved audit |
 
 Missing addon, missing band — never a fake or zeroed one. Any addon can add a
 band; see below.
@@ -170,12 +170,18 @@ If `reading()` throws, the exception is logged and your band reads unknown with
 the headline "Failed to report". The other bands render. The dashboard never
 breaks because of a band.
 
-### A real one
+### Real ones
 
 A11y Docs reports the Documents band: [`DocumentsContributor`](https://github.com/bpmore/statamic-a11y-docs/blob/main/src/Weather/DocumentsContributor.php)
 reads three stored aggregates, asks whether its database is installed first,
 and decides its own thresholds — clear when nothing fails, storm when critical
 problems reach a tenth of the library.
+
+Fallow shows the other shape a contributor can take. It computes on request and
+stores nothing, so its band reads an audit the site has chosen to save on a
+schedule, and until one exists it says exactly what to run. A product that has
+nothing stored does not get a band that computes; it gets an honest *unknown*
+with the next step.
 
 ### Trying it without a real contributor
 

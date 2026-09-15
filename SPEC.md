@@ -199,3 +199,18 @@ them. The two things that *can* go wrong are both in contributors:
 
 No caching in v1: contributors are meant to be cheap, and a cache layer would put a second
 "as of" time next to each band's own `computed_at`.
+
+### Bands as built (2026-09-15)
+
+Drift shipped as **Fallow**, and its scope changed on the way: it reports content
+model drift — which blueprint fields real content fills, which are dead, which
+entry keys no field claims — not translations. Its band is therefore
+**Content model**, not Translations, and the §3 table is out of date on that row.
+Fallow also stores nothing, so its band reads an audit the site saves on a
+schedule (`fallow.report_path`) and is *unknown* until one exists: the first
+contributor built around a saved artefact rather than a database.
+
+Constellation's band is **Structure**, read from the newest complete run per
+site, scaled by the share of pages that are orphans.
+
+Six bands are real. Nothing on the tile is faked any more.

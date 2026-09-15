@@ -73,7 +73,7 @@ light and dark, with no violations.
 | Freshness | Lifecycle |
 | Readability | Plain |
 | Structure | Constellation |
-| Translations | Drift |
+| Content model | Fallow |
 
 Missing addon, missing band — never a fake or zeroed one. **Any addon can
 contribute a band**: one small class and a one-line tag in a service provider,
