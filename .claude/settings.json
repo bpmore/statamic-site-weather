@@ -2,7 +2,6 @@
   "_comment_1": "Project-level: save as .claude/settings.json in the addon repo.",
   "_comment_2": "Note: a project settings file cannot set the default mode to 'auto' or 'bypassPermissions' for terminal sessions — only ~/.claude/settings.json can. Use --permission-mode auto on the command line, or set it in your user settings.",
   "_comment_3": "Do not use bypassPermissions / --dangerously-skip-permissions outside an isolated container.",
-
   "permissions": {
     "defaultMode": "acceptEdits",
     "allow": [
@@ -26,7 +25,6 @@
       "Bash(git checkout -b*)"
     ],
     "deny": [
-      "Bash(git push*)",
       "Bash(git reset --hard*)",
       "Bash(git clean*)",
       "Bash(rm -rf*)",
