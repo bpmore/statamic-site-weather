@@ -66,18 +66,24 @@ light and dark, with no violations.
 
 ### Bands
 
-| Band | Reported by |
-|---|---|
-| Accessibility | A11y Report |
-| Documents | A11y Docs |
-| Freshness | Lifecycle |
-| Readability | Plain |
-| Structure | Constellation |
-| Content model | Fallow |
+| Band | Reported by | Available |
+|---|---|---|
+| Documents | A11y Docs 1.4.0 | Now |
+| Freshness | Lifecycle | When it ships |
+| Readability | Plain | When it ships |
+| Structure | Constellation | When it ships |
+| Content model | Fallow | When it ships |
 
 Missing addon, missing band — never a fake or zeroed one. **Any addon can
 contribute a band**: one small class and a one-line tag in a service provider,
 with no dependency on Site Weather itself. The README shows how.
+
+Only the "Now" rows go in the listing as bands you get. The rest are named as
+what is coming, and move up as each addon reaches Packagist. **A11y Report
+does not ship a contributor** (checked 2026-09-16: nothing in its `src/` tags
+`site-weather.contributors`), so it is not listed as reporting a band until it
+does. Promising a band no addon produces is the mockup-as-feature case in
+marketplace rule 10.
 
 ### What it does not do
 
@@ -110,8 +116,9 @@ site.
 
 - **A11y Gate** — free. Blocks entries with accessibility problems.
 - **Site Weather** — free. One tile for the health of everything.
-- **A11y Report**, **A11y Docs**, **Lifecycle**, **Plain**, **Constellation**,
-  **Drift** — each reports a band.
+- **A11y Docs** reports a band today. **Lifecycle**, **Plain**,
+  **Constellation** and **Fallow** each report one when they ship. A11y Report
+  and Drift do not have contributors yet.
 
 With one of the paid addons installed it is a useful tile; with several it is
 the page you open first.
@@ -141,3 +148,9 @@ From `docs/screenshots/`, real dashboard renders:
 2. `widget-dark.png` — the same in the dark scheme
 3. `empty-light.png` — nothing reporting yet
 4. `focus-light.png` — keyboard focus on a band link
+
+**1, 2 and 4 must be retaken before the listing goes up.** They were rendered
+with the retired demo contributors and show an *Accessibility: 412 open issues*
+band and a *Translations* band, which no shipped addon reports. Retake them on
+greenhouse, where the real contributors are installed, so every band on the
+picture is one a customer can get. 3 is fine as it is.
