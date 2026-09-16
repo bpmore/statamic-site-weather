@@ -3,7 +3,7 @@
 **One dashboard tile that shows your site's health as weather.** Clear, fair,
 overcast, rain, storm. Click a band, go to the addon that measured it.
 
-![The Site Weather tile on the Statamic dashboard: overall storm, with six bands](docs/screenshots/widget-light.png)
+![The Site Weather tile on the Statamic dashboard: overall storm. Documents: 6 of 7 documents fail, 3 with critical problems. Bands for Documents, Freshness and Readability.](docs/screenshots/widget-light.png)
 
 **Site Weather never computes anything.** It has no scanner, no crawler and no
 checks. It reads what other addons have already stored and renders it, which is

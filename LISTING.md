@@ -142,15 +142,17 @@ dashboard, widget, health, status, overview, accessibility, a11y, weather
 
 ## Screenshots
 
-From `docs/screenshots/`, real dashboard renders:
+From `docs/screenshots/`, real dashboard renders taken on greenhouse on
+2026-09-16 with the real contributors installed, so every band on the picture
+is one an addon actually reports:
 
-1. `widget-light.png` — the tile with six bands, overall storm
+1. `widget-light.png` — the tile with three bands, overall storm: Documents
+   (A11y Docs), Freshness (Lifecycle), Readability (Plain)
 2. `widget-dark.png` — the same in the dark scheme
-3. `empty-light.png` — nothing reporting yet
-4. `focus-light.png` — keyboard focus on a band link
+3. `empty-light.png` — nothing reporting yet (from the 2026-09-11 run; the
+   empty state has no bands to be wrong about)
+4. `focus-light.png` — keyboard focus on the Documents band link
 
-**1, 2 and 4 must be retaken before the listing goes up.** They were rendered
-with the retired demo contributors and show an *Accessibility: 412 open issues*
-band and a *Translations* band, which no shipped addon reports. Retake them on
-greenhouse, where the real contributors are installed, so every band on the
-picture is one a customer can get. 3 is fine as it is.
+Captured through the Chrome extension at 2x, 1568 px wide. The earlier set
+was rendered with the retired demo contributors and showed Accessibility and
+Translations bands nothing ships.
